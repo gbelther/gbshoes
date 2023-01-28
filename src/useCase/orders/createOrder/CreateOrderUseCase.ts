@@ -1,5 +1,5 @@
-import { Order } from '../entities';
-import { ItemsRepository, OrdersRepository } from '../repository';
+import { Order } from '../../../entities';
+import { ItemsRepository, OrdersRepository } from '../../../repositories';
 import { CreateOrder } from './CreateOrder';
 import { Input, Output } from './dtos';
 
