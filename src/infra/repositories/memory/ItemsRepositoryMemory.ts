@@ -8,4 +8,13 @@ export class ItemsRepositoryMemory implements ItemsRepository {
     const item = this.items.find((item) => item.id === itemId);
     return item;
   }
+
+  async create(item: Item): Promise<void> {
+    this.items.push({
+      id: item.id,
+      description: item.description,
+      name: item.name,
+      price: item.price,
+    });
+  }
 }
