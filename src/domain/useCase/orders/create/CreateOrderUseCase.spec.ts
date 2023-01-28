@@ -1,17 +1,11 @@
 import { faker } from '@faker-js/faker';
-import { Cpf, Item } from '@/domain/entities';
+import { Cpf } from '@/domain/entities';
 import {
   OrdersRepositoryMemory,
   ItemsRepositoryMemory,
 } from '@/infra/repositories/memory';
 import { CreateOrderUseCase } from './CreateOrderUseCase';
-
-const makeItem = (): Item =>
-  new Item(
-    faker.commerce.productName(),
-    faker.commerce.productDescription(),
-    5
-  );
+import { makeItem } from '@/tests/helpers/domain/entities/itemHelpers';
 
 type SutResult = {
   sut: CreateOrderUseCase;
