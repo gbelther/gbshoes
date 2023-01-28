@@ -11,4 +11,9 @@ export class OrdersRepositoryMemory implements OrdersRepository {
   async listAll(): Promise<Order[]> {
     return this.orders;
   }
+
+  async listByCpf(cpf: string): Promise<Order[]> {
+    const orders = this.orders.filter((order) => order.cpf.value === cpf);
+    return orders;
+  }
 }
