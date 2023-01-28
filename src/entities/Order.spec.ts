@@ -68,7 +68,7 @@ describe('Order', () => {
     order.addItem(item, 3);
     expect(order.orderItems).toHaveLength(1);
     expect(order.orderItems[0]).toEqual({
-      item_id: item.id,
+      itemId: item.id,
       price: item.price,
       quantity: 3,
     });

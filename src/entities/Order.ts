@@ -26,7 +26,7 @@ export class Order {
 
   public addItem(item: Item, quantity: number) {
     const newOrderItem = new OrderItem({
-      item_id: item.id,
+      itemId: item.id,
       price: item.price,
       quantity,
     });
