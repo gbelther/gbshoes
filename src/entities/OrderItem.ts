@@ -1,16 +1,16 @@
 type Params = {
-  item_id: string;
+  itemId: string;
   price: number;
   quantity: number;
 };
 
 export class OrderItem {
-  item_id: string;
+  itemId: string;
   price: number;
   quantity: number;
 
-  constructor({ item_id, price, quantity }: Params) {
-    this.item_id = item_id;
+  constructor({ itemId, price, quantity }: Params) {
+    this.itemId = itemId;
     this.price = price;
     this.quantity = quantity;
   }
