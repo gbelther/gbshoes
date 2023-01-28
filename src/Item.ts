@@ -1,8 +1,14 @@
+import { randomUUID } from 'node:crypto';
+
 export class Item {
+  id: string;
+
   constructor(
-    readonly id: string,
     readonly name: string,
     readonly description: string,
-    readonly price: number
-  ) {}
+    readonly price: number,
+    id?: string
+  ) {
+    this.id = id ?? randomUUID();
+  }
 }
