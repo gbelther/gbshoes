@@ -1,7 +1,9 @@
 import { faker } from '@faker-js/faker';
-import { Cpf, Item } from '../../../entities';
-import { OrdersRepositoryMemory } from '../../../../infra/repositories/memory';
-import { ItemsRepositoryMemory } from '../../../../infra/repositories/memory/ItemsRepositoryMemory';
+import { Cpf, Item } from '@/domain/entities';
+import {
+  OrdersRepositoryMemory,
+  ItemsRepositoryMemory,
+} from '@/infra/repositories/memory';
 import { CreateOrderUseCase } from './CreateOrderUseCase';
 
 const makeItem = (): Item =>
