@@ -1,7 +1,12 @@
-import { sign } from 'jsonwebtoken';
-import { Encryptor, EncryptParams } from '@/domain/cryptography';
+import { sign, verify } from 'jsonwebtoken';
+import {
+  Decryptor,
+  Encryptor,
+  EncryptParams,
+  Result,
+} from '@/domain/cryptography';
 
-export class JsonWebTokenAdapter implements Encryptor {
+export class JsonWebTokenAdapter implements Encryptor, Decryptor {
   constructor(
     private readonly secret: string,
     private readonly secondsToExpire: number
@@ -9,5 +14,9 @@ export class JsonWebTokenAdapter implements Encryptor {
 
   async encrypt({ email }: EncryptParams): Promise<string> {
     return sign({ email }, this.secret, { expiresIn: this.secondsToExpire });
+  }
+
+  async decrypt(cryptography: string): Promise<Result> {
+    return verify(cryptography, this.secret) as Result;
   }
 }
