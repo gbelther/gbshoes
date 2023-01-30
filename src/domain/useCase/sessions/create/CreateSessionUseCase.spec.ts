@@ -3,12 +3,8 @@ import { faker } from '@faker-js/faker';
 import { CustomersRepositoryMemory } from '@/infra/repositories/memory';
 import { makeCustomer } from '@/tests/helpers/domain/entities';
 import { CreateSessionUseCase } from './CreateSessionUseCase';
-import {
-  Encryptor,
-  EncryptParams,
-  HashCompare,
-  HashCompareParams,
-} from '@/domain/cryptography';
+import { HashCompare, HashCompareParams } from '@/domain/cryptography';
+import { EncryptorSpy } from '@/tests/helpers/domain/cryptography';
 
 class BcryptAdapterSpy implements HashCompare {
   params: any;
@@ -17,16 +13,6 @@ class BcryptAdapterSpy implements HashCompare {
   async compare(params: HashCompareParams): Promise<boolean> {
     this.params = params;
     return true;
-  }
-}
-
-class EncryptorSpy implements Encryptor {
-  params: any;
-  result: string;
-
-  async encrypt(params: EncryptParams): Promise<string> {
-    this.params = params;
-    return this.result;
   }
 }
 
