@@ -11,14 +11,20 @@ export class CreateCustomerUseCase implements CreateCustomer {
   ) {}
 
   async execute(input: Input): Promise<Output> {
-    const passwordHashed = await this.hash.hash(input.password);
-
     const customer = new Customer({
       name: input.name,
       cpfData: input.cpf,
       email: input.email,
-      password: passwordHashed,
+      password: input.password,
     });
+
+    const emailInUse = await this.customersRepository.findByEmail(
+      customer.email
+    );
+    if (emailInUse) throw new Error('Este E-mail já está em uso.');
+
+    const passwordHashed = await this.hash.hash(input.password);
+    customer.setPassword(passwordHashed);
 
     await this.customersRepository.create(customer);
   }

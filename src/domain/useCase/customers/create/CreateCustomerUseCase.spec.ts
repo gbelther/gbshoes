@@ -5,9 +5,16 @@ import { Cpf } from '@/domain/entities';
 import { CustomersRepositoryMemory } from '@/infra/repositories/memory';
 import { CreateCustomerUseCase } from './CreateCustomerUseCase';
 
+const makeParams = () => ({
+  name: faker.name.fullName(),
+  cpf: '103.697.008-64',
+  email: faker.internet.email(),
+  password: faker.internet.password(),
+});
+
 class BcryptAdapterSpy implements Hash {
   params: any;
-  result: any;
+  result: any = faker.internet.password();
 
   async hash(plainText: string): Promise<string> {
     this.params = plainText;
@@ -36,12 +43,26 @@ describe('CreateCustomer UseCase', () => {
   it('should throw if CPF is invalid', async () => {
     const { sut } = makeSut();
     const promise = sut.execute({
-      name: faker.name.fullName(),
+      ...makeParams(),
       cpf: 'invalid_cpf',
-      email: faker.internet.email(),
-      password: faker.internet.password(),
     });
     await expect(promise).rejects.toThrow();
+  });
+
+  it('should throw if email is in use', async () => {
+    const { sut } = makeSut();
+    const params = makeParams();
+    await sut.execute(params);
+    const promise = sut.execute(params);
+    await expect(promise).rejects.toThrow('Este E-mail já está em uso.');
+  });
+
+  it('should call CustomersRepository(findByEmail) correctly', async () => {
+    const { sut, customersRepository } = makeSut();
+    const findByEmailSpy = jest.spyOn(customersRepository, 'findByEmail');
+    const input = makeParams();
+    await sut.execute(input);
+    expect(findByEmailSpy).toHaveBeenCalledWith(input.email);
   });
 
   it('should call CustomersRepository(create) correctly', async () => {
