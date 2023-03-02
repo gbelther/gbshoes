@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import 'module-alias/register';
 import express, { NextFunction, Request, Response } from 'express';
 import { router } from './routes';
 
