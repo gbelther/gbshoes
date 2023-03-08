@@ -1,3 +1,3 @@
-import { CustomersRepositoryMemory } from '@/infra/repositories/memory';
+import { CustomersRepositoryDatabase } from '@/infra/repositories/database';
 
-export const makeCustomersRepository = () => new CustomersRepositoryMemory();
+export const makeCustomersRepository = () => new CustomersRepositoryDatabase();
