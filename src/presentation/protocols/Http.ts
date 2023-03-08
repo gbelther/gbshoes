@@ -4,6 +4,7 @@ export type HttpResponse<Body = any> = {
 };
 
 export enum HttpStatusCode {
+  ok = 200,
   created = 201,
   badRequest = 400,
 }
