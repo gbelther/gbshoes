@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client';
 import { Customer } from '@/domain/entities';
 import { CustomersRepository } from '@/domain/repositories';
+import { PrismaClient } from '../../database/prisma/client';
 
 export class CustomersRepositoryDatabase implements CustomersRepository {
   private client: PrismaClient;

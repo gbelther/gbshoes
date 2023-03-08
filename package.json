@@ -43,5 +43,9 @@
   },
   "_moduleAliases": {
     "@": "dist"
+  },
+  "prisma": {
+    "schema": "src/infra/database/prisma/schema.prisma",
+    "migrateOutput": "src/infra/database/prisma/migrations"
   }
 }
