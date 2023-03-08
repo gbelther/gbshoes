@@ -14,7 +14,7 @@ model Customer {
   cpf String @db.VarChar(11) @unique
   email String @unique
   password String
-  created_at DateTime @default(now()) @map("createdAt")
+  createdAt DateTime @default(now()) @map("created_at")
 
   @@map("customers")
 }
